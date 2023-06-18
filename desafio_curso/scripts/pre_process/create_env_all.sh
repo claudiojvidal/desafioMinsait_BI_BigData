@@ -2,7 +2,7 @@
 
 # Criação das pastas
 
-DADOS=("cidade" "estado" "filial" "parceiro" "cliente" "subcategoria" "categoria" "item_pedido" "produto")
+DADOS=("vendas" "clientes" "endereco" "regiao" "divisao")
 
 for i in "${DADOS[@]}"
 do
