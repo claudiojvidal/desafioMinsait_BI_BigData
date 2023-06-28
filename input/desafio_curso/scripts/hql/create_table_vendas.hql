@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL};
+
 CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL} ( 
    actualDeliveryDate  string,
    customerKey string,
@@ -21,9 +23,9 @@ CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL} 
    salesRep string,
    uM string
 )
-COMMENT 'Tabela de '${TARGET_TABLE_EXTERNAL}
+COMMENT 'Tabela de ${TARGET_TABLE_EXTERNAL}'
 ROW FORMAT DELIMITED
-FIELDS TERMINATED BY '|'
+FIELDS TERMINATED BY ';'
 STORED AS TEXTFILE
 location '${HDFS_DIR}'
 TBLPROPERTIES ("skip.header.line.count"="1");
@@ -84,7 +86,7 @@ SELECT
    salesPrice string,
    salesQuantity string,
    salesRep string,
-   uM string
+   uM string,
    ${PARTICAO} as DT_FOTO
 FROM ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
 ;

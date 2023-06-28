@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL};
+
 CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL} ( 
    addressNumber string,
    city string, 
@@ -9,9 +11,9 @@ CREATE EXTERNAL TABLE IF NOT EXISTS ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL} 
    state string,
    zipCode string
 )
-COMMENT 'Tabela de '${TARGET_TABLE_EXTERNAL}
+COMMENT 'Tabela de ${TARGET_TABLE_EXTERNAL}'
 ROW FORMAT DELIMITED
-FIELDS TERMINATED BY '|'
+FIELDS TERMINATED BY ';'
 STORED AS TEXTFILE
 location '${HDFS_DIR}'
 TBLPROPERTIES ("skip.header.line.count"="1");
@@ -48,7 +50,7 @@ SELECT
    customerAddress3 string,
    CustomerAddress4 string,
    state string,
-   zipCode string
+   zipCode string,
    ${PARTICAO} as DT_FOTO
 FROM ${TARGET_DATABASE}.${TARGET_TABLE_EXTERNAL}
 ;
